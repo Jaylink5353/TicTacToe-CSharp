@@ -1,0 +1,14 @@
+C:\Users\Jaymes G\Documents\TicTacToeCS\bin\Debug\net9.0\TicTacToeCS.exe
+C:\Users\Jaymes G\Documents\TicTacToeCS\bin\Debug\net9.0\TicTacToeCS.deps.json
+C:\Users\Jaymes G\Documents\TicTacToeCS\bin\Debug\net9.0\TicTacToeCS.runtimeconfig.json
+C:\Users\Jaymes G\Documents\TicTacToeCS\bin\Debug\net9.0\TicTacToeCS.dll
+C:\Users\Jaymes G\Documents\TicTacToeCS\bin\Debug\net9.0\TicTacToeCS.pdb
+C:\Users\Jaymes G\Documents\TicTacToeCS\obj\Debug\net9.0\TicTacToeCS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jaymes G\Documents\TicTacToeCS\obj\Debug\net9.0\TicTacToeCS.AssemblyInfoInputs.cache
+C:\Users\Jaymes G\Documents\TicTacToeCS\obj\Debug\net9.0\TicTacToeCS.AssemblyInfo.cs
+C:\Users\Jaymes G\Documents\TicTacToeCS\obj\Debug\net9.0\TicTacToeCS.csproj.CoreCompileInputs.cache
+C:\Users\Jaymes G\Documents\TicTacToeCS\obj\Debug\net9.0\TicTacToeCS.dll
+C:\Users\Jaymes G\Documents\TicTacToeCS\obj\Debug\net9.0\refint\TicTacToeCS.dll
+C:\Users\Jaymes G\Documents\TicTacToeCS\obj\Debug\net9.0\TicTacToeCS.pdb
+C:\Users\Jaymes G\Documents\TicTacToeCS\obj\Debug\net9.0\TicTacToeCS.genruntimeconfig.cache
+C:\Users\Jaymes G\Documents\TicTacToeCS\obj\Debug\net9.0\ref\TicTacToeCS.dll
