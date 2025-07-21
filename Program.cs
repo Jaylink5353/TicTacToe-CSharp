@@ -60,6 +60,7 @@ void userInput()
     {
         Console.WriteLine("Thanks for playing! Goodbye!");
         play = false;
+        return;
     }
     Console.WriteLine($"You've selected {userCoord}");
     Thread.Sleep(500);
