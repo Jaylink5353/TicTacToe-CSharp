@@ -24,6 +24,8 @@ string c1 = "-";
 string c2 = "-";
 string c3 = "-";
 
+bool picked = false;
+
 
 
 while (play == true)
@@ -48,12 +50,17 @@ void printGrid()
     Console.WriteLine("      |     |     ");
     Thread.Sleep(500);
     Console.WriteLine("Type a coordinate!");
-    cordPick();
+    userInput();
 }
 
-void cordPick()
+void userInput()
 {
     userCoord = Console.ReadLine();
+    if (userCoord == "q")
+    {
+        Console.WriteLine("Thanks for playing! Goodbye!");
+        play = false;
+    }
     Console.WriteLine($"You've selected {userCoord}");
     Thread.Sleep(500);
     fillGrid();
@@ -69,22 +76,79 @@ void fillGrid()
             if (userCoord.Contains("1"))
             {
                 a1 = "X";
-                Console.WriteLine("A1");
+                picked = true;
             }
             if (userCoord.Contains("2"))
             {
                 a2 = "X";
+                picked = true;
             }
             if (userCoord.Contains("3"))
             {
                 a3 = "X";
+                picked = true;
+            }
+            else if (picked == false)
+            {
+                Console.WriteLine("Hmm. I don't know what coordinate that is. Try again!");
+                Thread.Sleep(500);
+                printGrid();
             }
         }
         if (userCoord.Contains("b") || userCoord.Contains("B"))
         {
-            
+            if (userCoord.Contains("1"))
+            {
+                b1 = "X";
+                picked = true;
+            }
+            if (userCoord.Contains("2"))
+            {
+                b2 = "X";
+                picked = true;
+            }
+            if (userCoord.Contains("3"))
+            {
+                b3 = "X";
+                picked = true;
+            }
+            else if (picked == false)
+            {
+                Console.WriteLine("Hmm. I don't know what coordinate that is. Try again!");
+                Thread.Sleep(500);
+                printGrid();
+            }
         }
-        
+        if (userCoord.Contains("c") || userCoord.Contains("C"))
+        {
+            if (userCoord.Contains("1"))
+            {
+                c1 = "X";
+                picked = true;
+            }
+            if (userCoord.Contains("2"))
+            {
+                c2 = "X";
+                picked = true;
+            }
+            if (userCoord.Contains("3"))
+            {
+                c3 = "X";
+                picked = true;
+            }
+            else if (picked == false)
+            {
+                Console.WriteLine("Hmm. I don't know what coordinate that is. Try again!");
+                Thread.Sleep(500);
+                printGrid();
+            }
+        }
+        else if (picked == false)
+            {
+                Console.WriteLine("Hmm. I don't know what coordinate that is. Try again!");
+                Thread.Sleep(500);
+                printGrid();
+            }  
     }
     else
     {
