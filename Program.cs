@@ -22,9 +22,12 @@ string c1 = "-";
 string c2 = "-";
 string c3 = "-";
 bool picked = false;
+int spacesOccupied = 0;
+string xOrO = "N";
 
 void newGame()
 {
+    player = random.Next(1, 3);
     a1 = "-";
     a2 = "-";
     a3 = "-";
@@ -36,6 +39,7 @@ void newGame()
     c3 = "-";
     picked = false;
     userCoord = "xx";
+    spacesOccupied = 0;
 }
 
 
@@ -50,15 +54,15 @@ while (play == true)
 void printGrid()
 {
     userCoord = "xx";
-    Console.WriteLine("   a     b     c ");
+    Console.WriteLine("   1     2     3 ");
     Console.WriteLine("      |     |     ");
-    Console.WriteLine($"1  {a1}  |  {a2}  |  {a3}  ");
+    Console.WriteLine($"a  {a1}  |  {a2}  |  {a3}  ");
     Console.WriteLine("______|_____|_____");
     Console.WriteLine("      |     |     ");
-    Console.WriteLine($"2  {b1}  |  {b2}  |  {b3}  ");
+    Console.WriteLine($"b  {b1}  |  {b2}  |  {b3}  ");
     Console.WriteLine("______|_____|_____");
     Console.WriteLine("      |     |     ");
-    Console.WriteLine($"3  {c1}  |  {c2}  |  {c3}  ");
+    Console.WriteLine($"c  {c1}  |  {c2}  |  {c3}  ");
     Console.WriteLine("      |     |     ");
     Thread.Sleep(500);
     Console.WriteLine("Type a coordinate!");
@@ -179,7 +183,7 @@ void fillGrid()
             printGrid();
         }
     }
-    else
+    else if (player == 2) ;
     {
         if (userCoord.Contains("a") || userCoord.Contains("A"))
         {
@@ -260,5 +264,47 @@ void fillGrid()
             printGrid();
         }
     }
+    spacesOccupied++;
+    winLoseDraw();
     printGrid();
+}
+
+void winLoseDraw()
+{
+    
+    if (player == 1)
+    {
+        xOrO = "X";
+    }
+    else if (player == 2)
+    {
+        xOrO = "O";
+    }
+    Console.WriteLine(xOrO);
+    //player wins
+    //horizontal
+    if (a1.Contains(xOrO) && a2.Contains(xOrO) && a3.Contains(xOrO)) { playerWins(); }//toprow
+    if (b1.Contains(xOrO) && b2.Contains(xOrO) && b3.Contains(xOrO)) { playerWins(); }//middlerow
+    if (c1.Contains(xOrO) && c2.Contains(xOrO) && c3.Contains(xOrO)) { playerWins(); }//bottom
+    //vertical
+    if (a1.Contains(xOrO) && b1.Contains(xOrO) && c1.Contains(xOrO)) { playerWins(); }//left
+    if (a2.Contains(xOrO) && b2.Contains(xOrO) && c2.Contains(xOrO)) { playerWins(); }//middle
+    if (a3.Contains(xOrO) && b3.Contains(xOrO) && c3.Contains(xOrO)) { playerWins(); }//right
+    //diagonal
+    if (a1.Contains(xOrO) && b2.Contains(xOrO) && c3.Contains(xOrO)) { playerWins(); }//lr
+    if (a3.Contains(xOrO) && b2.Contains(xOrO) && c1.Contains(xOrO)) { playerWins(); }//rl
+
+    //draw
+    if (spacesOccupied == 9)
+    {
+        Console.WriteLine("It's a draw!");
+        Thread.Sleep(1500);
+        newGame();
+    }
+    void playerWins()
+    {
+        Console.WriteLine("You win!");
+        Thread.Sleep(1500);
+        newGame();
+    }
 }

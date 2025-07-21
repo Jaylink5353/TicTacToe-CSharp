@@ -12,3 +12,4 @@ C:\Users\Jaymes G\Documents\TicTacToeCS\obj\Debug\net9.0\refint\TicTacToeCS.dll
 C:\Users\Jaymes G\Documents\TicTacToeCS\obj\Debug\net9.0\TicTacToeCS.pdb
 C:\Users\Jaymes G\Documents\TicTacToeCS\obj\Debug\net9.0\TicTacToeCS.genruntimeconfig.cache
 C:\Users\Jaymes G\Documents\TicTacToeCS\obj\Debug\net9.0\ref\TicTacToeCS.dll
+C:\Users\Jaymes G\Documents\TicTacToeCS\obj\Debug\net9.0\TicTacToeCS.sourcelink.json
