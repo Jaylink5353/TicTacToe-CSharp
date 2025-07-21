@@ -183,7 +183,7 @@ void fillGrid()
             printGrid();
         }
     }
-    else if (player == 2) ;
+    else if (player == 2)
     {
         if (userCoord.Contains("a") || userCoord.Contains("A"))
         {
@@ -271,7 +271,6 @@ void fillGrid()
 
 void winLoseDraw()
 {
-    
     if (player == 1)
     {
         xOrO = "X";
