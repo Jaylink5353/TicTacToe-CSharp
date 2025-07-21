@@ -10,7 +10,8 @@ Console.WriteLine("Made by Jaylink5353");
 int game = 0;
 Random random = new Random();
 string userCoord = "xx";
-int player = random.Next(1, 3);
+//int player = random.Next(1, 3);
+int player = 1;
 //set coordinates
 
 string a1 = "-";
@@ -52,12 +53,7 @@ void printGrid()
 
 void cordPick()
 {
-    string userInput = Console.ReadLine();
-    if (userInput == "a1")
-    {
-        userCoord = "a1";
-    }
-
+    userCoord = Console.ReadLine();
     Console.WriteLine($"You've selected {userCoord}");
     Thread.Sleep(500);
     fillGrid();
@@ -68,10 +64,27 @@ void fillGrid()
 {
     if (player == 1)
     {
-        if (userCoord == "a1")
+        if (userCoord.Contains("a") || userCoord.Contains("A"))
         {
-            a1 = "X";
+            if (userCoord.Contains("1"))
+            {
+                a1 = "X";
+                Console.WriteLine("A1");
+            }
+            if (userCoord.Contains("2"))
+            {
+                a2 = "X";
+            }
+            if (userCoord.Contains("3"))
+            {
+                a3 = "X";
+            }
         }
+        if (userCoord.Contains("b") || userCoord.Contains("B"))
+        {
+            
+        }
+        
     }
     else
     {
