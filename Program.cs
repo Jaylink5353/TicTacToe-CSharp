@@ -24,6 +24,8 @@ string c3 = "-";
 bool picked = false;
 int spacesOccupied = 0;
 string xOrO = "N";
+string CPUchar = "N";
+bool CPUPlayed = false;
 
 void newGame()
 {
@@ -47,6 +49,7 @@ void newGame()
 Console.WriteLine(help);
 while (play == true)
 {
+    //player = 1;
     printGrid();
 }
 
@@ -67,6 +70,7 @@ void printGrid()
     Thread.Sleep(500);
     Console.WriteLine("Type a coordinate!");
     userInput();
+    CPUPlayed = false;
 }
 
 void userInput()
@@ -101,6 +105,12 @@ void userInput()
 
 void fillGrid()
 {
+    void spaceFull()
+    {
+        Console.WriteLine("Looks like that space is taken. Choose another one!");
+        Thread.Sleep(1500);
+        printGrid();
+    }
     picked = false;
     if (player == 1)
     {
@@ -108,16 +118,19 @@ void fillGrid()
         {
             if (userCoord.Contains("1"))
             {
+                if (a1 != "-"){ spaceFull(); }
                 a1 = "X";
                 picked = true;
             }
             if (userCoord.Contains("2"))
             {
+                if (a2 != "-"){ spaceFull(); }
                 a2 = "X";
                 picked = true;
             }
             if (userCoord.Contains("3"))
             {
+                if (a3 != "-"){ spaceFull(); }
                 a3 = "X";
                 picked = true;
             }
@@ -132,16 +145,19 @@ void fillGrid()
         {
             if (userCoord.Contains("1"))
             {
+                if (b1 != "-"){ spaceFull(); }
                 b1 = "X";
                 picked = true;
             }
             if (userCoord.Contains("2"))
             {
+                if (b2 != "-"){ spaceFull(); }
                 b2 = "X";
                 picked = true;
             }
             if (userCoord.Contains("3"))
             {
+                if (b3 != "-"){ spaceFull(); }
                 b3 = "X";
                 picked = true;
             }
@@ -156,16 +172,19 @@ void fillGrid()
         {
             if (userCoord.Contains("1"))
             {
+                if (c1 != "-"){ spaceFull(); }
                 c1 = "X";
                 picked = true;
             }
             if (userCoord.Contains("2"))
             {
+                if (c2 != "-"){ spaceFull(); }
                 c2 = "X";
                 picked = true;
             }
             if (userCoord.Contains("3"))
             {
+                if (c3 != "-"){ spaceFull(); }
                 c3 = "X";
                 picked = true;
             }
@@ -189,16 +208,19 @@ void fillGrid()
         {
             if (userCoord.Contains("1"))
             {
+                if (a1 != "-"){ spaceFull(); }
                 a1 = "O";
                 picked = true;
             }
             if (userCoord.Contains("2"))
             {
+                if (a2 != "-"){ spaceFull(); }
                 a2 = "O";
                 picked = true;
             }
             if (userCoord.Contains("3"))
             {
+                if (a3 != "-"){ spaceFull(); }
                 a3 = "O";
                 picked = true;
             }
@@ -213,16 +235,19 @@ void fillGrid()
         {
             if (userCoord.Contains("1"))
             {
+                if (b1 != "-"){ spaceFull(); }
                 b1 = "O";
                 picked = true;
             }
             if (userCoord.Contains("2"))
             {
+                if (b2 != "-"){ spaceFull(); }
                 b2 = "O";
                 picked = true;
             }
             if (userCoord.Contains("3"))
             {
+                if (b3 != "-"){ spaceFull(); }
                 b3 = "O";
                 picked = true;
             }
@@ -237,16 +262,19 @@ void fillGrid()
         {
             if (userCoord.Contains("1"))
             {
+                if (c1 != "-"){ spaceFull(); }
                 c1 = "O";
                 picked = true;
             }
             if (userCoord.Contains("2"))
             {
+                if (c2 != "-"){ spaceFull(); }
                 c2 = "O";
                 picked = true;
             }
             if (userCoord.Contains("3"))
             {
+                if (c3 != "-"){ spaceFull(); }
                 c3 = "O";
                 picked = true;
             }
@@ -265,6 +293,7 @@ void fillGrid()
         }
     }
     spacesOccupied++;
+    cpuThink();
     winLoseDraw();
     printGrid();
 }
@@ -306,4 +335,30 @@ void winLoseDraw()
         Thread.Sleep(1500);
         newGame();
     }
+}
+
+void cpuThink()
+{
+    if (player == 1)
+    {
+        CPUchar = "O";
+    }
+    if (player == 2)
+    {
+        CPUchar = "X";
+    }
+    Console.WriteLine("I'm Thinking....");
+    Thread.Sleep(2000);
+    //Block Player
+    if (a1 == xOrO && a2 == xOrO && a3 == "-" && CPUPlayed == false){ a3 = CPUchar;  CPUPlayed = true; }
+
+    //Check if Corners are Occupied
+    if (a1 == "-" && CPUPlayed == false) { a1 = CPUchar; CPUPlayed = true; }
+    if (c3 == "-" && CPUPlayed == false) { c3 = CPUchar; CPUPlayed = true; }
+    if (c1 == "-" && CPUPlayed == false) { c1 = CPUchar; CPUPlayed = true; }
+    if (a3 == "-" && CPUPlayed == false) { a3 = CPUchar; CPUPlayed = true; }
+
+    //MUST BE AT END OF FUNCTION
+    CPUPlayed = false;
+
 }
