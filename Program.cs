@@ -26,6 +26,7 @@ int spacesOccupied = 0;
 string xOrO = "N";
 string CPUchar = "N";
 bool CPUPlayed = false;
+bool firstTurn = true;
 
 
 void newGame()
@@ -44,6 +45,7 @@ void newGame()
     userCoord = "xx";
     spacesOccupied = 0;
     charDetermine();
+    firstTurn = true;
 }
 
 void charDetermine()
@@ -66,6 +68,7 @@ void charDetermine()
         CPUchar = "X";
     }
     Console.WriteLine($"You are {xOrO}.");
+
     Thread.Sleep(1000);
 }
 
@@ -74,7 +77,6 @@ void charDetermine()
 Console.WriteLine(help);
 while (play == true)
 {
-    //player = 1;
     charDetermine();
     printGrid(false);
 
@@ -97,9 +99,18 @@ void printGrid(bool cpuWin)
     Thread.Sleep(500);
     if (cpuWin == false)
     {
+        if (xOrO == "O" && firstTurn == true)
+        {
+            Console.WriteLine("Your are going after the CPU.");
+            Thread.Sleep(1500);
+            cpuThink();
+            winLoseDraw();
+            firstTurn = false;
+            printGrid(false);
+        }
         Console.WriteLine("Type a coordinate!");
         userInput();
-        CPUPlayed = false; 
+        CPUPlayed = false;
     }
 
 }
