@@ -384,7 +384,7 @@ void cpuThink()
     Console.WriteLine("I'm Thinking....");
     Thread.Sleep(2000);
     //See if CPU Can make winning move
-     if (a1 == CPUchar && a2 == CPUchar && a3 == "-" && CPUPlayed == false) { a3 = CPUchar; CPUPlayed = true; }
+    if (a1 == CPUchar && a2 == CPUchar && a3 == "-" && CPUPlayed == false) { a3 = CPUchar; CPUPlayed = true; }
     if (a1 == CPUchar && a3 == CPUchar && a2 == "-" && CPUPlayed == false) { a2 = CPUchar;  CPUPlayed = true; }
     if (a2 == CPUchar && a3 == CPUchar && a1 == "-" && CPUPlayed == false) { a1 = CPUchar;  CPUPlayed = true; }
     //middle row
@@ -457,6 +457,11 @@ void cpuThink()
     if (c3 == "-" && CPUPlayed == false) { c3 = CPUchar; CPUPlayed = true; }
     if (c1 == "-" && CPUPlayed == false) { c1 = CPUchar; CPUPlayed = true; }
     if (a3 == "-" && CPUPlayed == false) { a3 = CPUchar; CPUPlayed = true; }
+    //Middle Spaces
+    if (a2 == "-" && CPUPlayed == false) { a2 = CPUchar; CPUPlayed = true; }
+    if (b1 == "-" && CPUPlayed == false) { b1 = CPUchar; CPUPlayed = true; }
+    if (c2 == "-" && CPUPlayed == false) { c2 = CPUchar;  CPUPlayed = true; }
+    if (b3 == "-" && CPUPlayed == false) { b3 = CPUchar; CPUPlayed = true; }
 
     //MUST BE AT END OF FUNCTION
     spacesOccupied++;
