@@ -27,6 +27,7 @@ string xOrO = "N";
 string CPUchar = "N";
 bool CPUPlayed = false;
 
+
 void newGame()
 {
     player = random.Next(1, 3);
@@ -42,6 +43,28 @@ void newGame()
     picked = false;
     userCoord = "xx";
     spacesOccupied = 0;
+    charDetermine();
+}
+
+void charDetermine()
+{
+    if (player == 1)
+    {
+        xOrO = "X";
+    }
+    else if (player == 2)
+    {
+        xOrO = "O";
+    }
+
+    if (player == 1)
+    {
+        CPUchar = "O";
+    }
+    if (player == 2)
+    {
+        CPUchar = "X";
+    }
 }
 
 
@@ -50,7 +73,9 @@ Console.WriteLine(help);
 while (play == true)
 {
     //player = 1;
+    charDetermine();
     printGrid();
+
 }
 
 
@@ -300,15 +325,6 @@ void fillGrid()
 
 void winLoseDraw()
 {
-    if (player == 1)
-    {
-        xOrO = "X";
-    }
-    else if (player == 2)
-    {
-        xOrO = "O";
-    }
-    Console.WriteLine(xOrO);
     //player wins
     //horizontal
     if (a1.Contains(xOrO) && a2.Contains(xOrO) && a3.Contains(xOrO)) { playerWins(); }//toprow
@@ -339,14 +355,6 @@ void winLoseDraw()
 
 void cpuThink()
 {
-    if (player == 1)
-    {
-        CPUchar = "O";
-    }
-    if (player == 2)
-    {
-        CPUchar = "X";
-    }
     Console.WriteLine("I'm Thinking....");
     Thread.Sleep(2000);
     //Block Player
@@ -383,7 +391,7 @@ void cpuThink()
     if (a3 == xOrO && c1 ==  xOrO && b2 == "-" && CPUPlayed == false) { b2 = CPUchar; CPUPlayed = true; }
     if (b2 == xOrO && c1 ==  xOrO && a3 == "-" && CPUPlayed == false) { a3 = CPUchar; CPUPlayed = true; }
 
-    
+
     //Check if Corners are Occupied
     if (a1 == "-" && CPUPlayed == false) { a1 = CPUchar; CPUPlayed = true; }
     if (c3 == "-" && CPUPlayed == false) { c3 = CPUchar; CPUPlayed = true; }
