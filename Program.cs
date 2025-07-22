@@ -65,6 +65,8 @@ void charDetermine()
     {
         CPUchar = "X";
     }
+    Console.WriteLine($"You are {xOrO}.");
+    Thread.Sleep(1000);
 }
 
 
@@ -74,12 +76,12 @@ while (play == true)
 {
     //player = 1;
     charDetermine();
-    printGrid();
+    printGrid(false);
 
 }
 
 
-void printGrid()
+void printGrid(bool cpuWin)
 {
     userCoord = "xx";
     Console.WriteLine("   1     2     3 ");
@@ -93,9 +95,13 @@ void printGrid()
     Console.WriteLine($"c  {c1}  |  {c2}  |  {c3}  ");
     Console.WriteLine("      |     |     ");
     Thread.Sleep(500);
-    Console.WriteLine("Type a coordinate!");
-    userInput();
-    CPUPlayed = false;
+    if (cpuWin == false)
+    {
+        Console.WriteLine("Type a coordinate!");
+        userInput();
+        CPUPlayed = false; 
+    }
+
 }
 
 void userInput()
@@ -112,14 +118,14 @@ void userInput()
         Console.WriteLine("New Game");
         Thread.Sleep(1000);
         newGame();
-        printGrid();
+        printGrid(false);
 
     }
     if (userCoord == "h")
     {
         Console.WriteLine($"{help} Press any key to continue.");
         Console.ReadKey();
-        printGrid();
+        printGrid(false);
     }
     Console.WriteLine($"You've selected {userCoord}");
     Thread.Sleep(500);
@@ -134,7 +140,7 @@ void fillGrid()
     {
         Console.WriteLine("Looks like that space is taken. Choose another one!");
         Thread.Sleep(1500);
-        printGrid();
+        printGrid(false);
     }
     picked = false;
     if (player == 1)
@@ -163,7 +169,7 @@ void fillGrid()
             {
                 Console.WriteLine("Hmm. I don't know what coordinate that is. Try again!");
                 Thread.Sleep(1500);
-                printGrid();
+                printGrid(false);
             }
         }
         if (userCoord.Contains("b") || userCoord.Contains("B"))
@@ -190,7 +196,7 @@ void fillGrid()
             {
                 Console.WriteLine("Hmm. I don't know what coordinate that is. Try again!");
                 Thread.Sleep(1500);
-                printGrid();
+                printGrid(false);
             }
         }
         if (userCoord.Contains("c") || userCoord.Contains("C"))
@@ -217,14 +223,14 @@ void fillGrid()
             {
                 Console.WriteLine("Hmm. I don't know what coordinate that is. Try again!");
                 Thread.Sleep(1500);
-                printGrid();
+                printGrid(false);
             }
         }
         else if (picked == false)
         {
             Console.WriteLine("Hmm. I don't know what coordinate that is. Try again!");
             Thread.Sleep(500);
-            printGrid();
+            printGrid(false);
         }
     }
     else if (player == 2)
@@ -253,7 +259,7 @@ void fillGrid()
             {
                 Console.WriteLine("Hmm. I don't know what coordinate that is. Try again!");
                 Thread.Sleep(1500);
-                printGrid();
+                printGrid(false);
             }
         }
         if (userCoord.Contains("b") || userCoord.Contains("B"))
@@ -280,7 +286,7 @@ void fillGrid()
             {
                 Console.WriteLine("Hmm. I don't know what coordinate that is. Try again!");
                 Thread.Sleep(1500);
-                printGrid();
+                printGrid(false);
             }
         }
         if (userCoord.Contains("c") || userCoord.Contains("C"))
@@ -307,20 +313,20 @@ void fillGrid()
             {
                 Console.WriteLine("Hmm. I don't know what coordinate that is. Try again!");
                 Thread.Sleep(1500);
-                printGrid();
+                printGrid(false);
             }
         }
         else if (picked == false)
         {
             Console.WriteLine("Hmm. I don't know what coordinate that is. Try again!");
             Thread.Sleep(500);
-            printGrid();
+            printGrid(false);
         }
     }
     spacesOccupied++;
     cpuThink();
     winLoseDraw();
-    printGrid();
+    printGrid(false);
 }
 
 void winLoseDraw()
@@ -338,17 +344,37 @@ void winLoseDraw()
     if (a1.Contains(xOrO) && b2.Contains(xOrO) && c3.Contains(xOrO)) { playerWins(); }//lr
     if (a3.Contains(xOrO) && b2.Contains(xOrO) && c1.Contains(xOrO)) { playerWins(); }//rl
 
+    //CPU Wins
+    if (a1.Contains(CPUchar) && a2.Contains(CPUchar) && a3.Contains(CPUchar)) { CPUWins(); }//toprow
+    if (b1.Contains(CPUchar) && b2.Contains(CPUchar) && b3.Contains(CPUchar)) { CPUWins(); }//middlerow
+    if (c1.Contains(CPUchar) && c2.Contains(CPUchar) && c3.Contains(CPUchar)) { CPUWins(); }//bottom
+    //vertical
+    if (a1.Contains(CPUchar) && b1.Contains(CPUchar) && c1.Contains(CPUchar)) { CPUWins(); }//left
+    if (a2.Contains(CPUchar) && b2.Contains(CPUchar) && c2.Contains(CPUchar)) { CPUWins(); }//middle
+    if (a3.Contains(CPUchar) && b3.Contains(CPUchar) && c3.Contains(CPUchar)) { CPUWins(); }//right
+    //diagonal
+    if (a1.Contains(CPUchar) && b2.Contains(CPUchar) && c3.Contains(CPUchar)) { CPUWins(); }//lr
+    if (a3.Contains(CPUchar) && b2.Contains(CPUchar) && c1.Contains(CPUchar)) { CPUWins(); }//rl
     //draw
     if (spacesOccupied >= 9)
     {
+        printGrid(true);
         Console.WriteLine("It's a draw!");
-        Thread.Sleep(1500);
+        Thread.Sleep(2000);
         newGame();
     }
     void playerWins()
     {
+        printGrid(true);
         Console.WriteLine("You win!");
-        Thread.Sleep(1500);
+        Thread.Sleep(2000);
+        newGame();
+    }
+    void CPUWins()
+    {
+        printGrid(true);
+        Console.WriteLine("I win! Better luck next time!");
+        Thread.Sleep(2000);
         newGame();
     }
 }
@@ -357,6 +383,39 @@ void cpuThink()
 {
     Console.WriteLine("I'm Thinking....");
     Thread.Sleep(2000);
+    //See if CPU Can make winning move
+     if (a1 == CPUchar && a2 == CPUchar && a3 == "-" && CPUPlayed == false) { a3 = CPUchar; CPUPlayed = true; }
+    if (a1 == CPUchar && a3 == CPUchar && a2 == "-" && CPUPlayed == false) { a2 = CPUchar;  CPUPlayed = true; }
+    if (a2 == CPUchar && a3 == CPUchar && a1 == "-" && CPUPlayed == false) { a1 = CPUchar;  CPUPlayed = true; }
+    //middle row
+    if (b1 == CPUchar && b2 == CPUchar && b3 == "-" && CPUPlayed == false) { b3 = CPUchar; CPUPlayed = true; }
+    if (b1 == CPUchar && b3 == CPUchar && b2 == "-" && CPUPlayed == false) { b2 = CPUchar; CPUPlayed = true; }
+    if (b2 == CPUchar && b3 == CPUchar && b1 == "-" && CPUPlayed == false) { b1 = CPUchar;  CPUPlayed = true; }
+    //Bottom Row
+    if (c1 == CPUchar && c2 == CPUchar && c3 == "-" && CPUPlayed == false) { c3 = CPUchar; CPUPlayed = true; }
+    if (c1 == CPUchar && c3 == CPUchar && c2 == "-" && CPUPlayed == false) { c2 = CPUchar; CPUPlayed = true; }
+    if (c2 ==  CPUchar && c3 == CPUchar && c1 == "-" && CPUPlayed == false) { c1 = CPUchar;  CPUPlayed = true; }
+    //Left Colum
+    if (a1 == CPUchar && b1 ==  CPUchar && c1 == "-" && CPUPlayed == false) { c1 = CPUchar;  CPUPlayed = true; }
+    if (a1 == CPUchar && c1 == CPUchar && b1 == "-" && CPUPlayed == false) { b1 = CPUchar; CPUPlayed = true; }
+    if (b1 == CPUchar && c1 == CPUchar && a1 == "-" && CPUPlayed == false) { a1 = CPUchar;  CPUPlayed = true; }
+    //Middle Colum
+    if (a2 == CPUchar && b2 ==  CPUchar && c2 == "-" && CPUPlayed == false) { c2 = CPUchar; CPUPlayed = true; }
+    if (a2 == CPUchar && c2 ==  CPUchar && b2 == "-" && CPUPlayed == false) { b2 = CPUchar; CPUPlayed = true; }
+    if (b2 == CPUchar && c2 ==  CPUchar && a2 == "-" && CPUPlayed == false) { a2 = CPUchar; CPUPlayed = true; }
+    //Bottom Colum
+    if (a3 == CPUchar && b3 ==  CPUchar && c2 == "-" && CPUPlayed == false) { c3 = CPUchar; CPUPlayed = true; }
+    if (a3 == CPUchar && c3 ==  CPUchar && b3 == "-" && CPUPlayed == false) { b3 = CPUchar; CPUPlayed = true; }
+    if (b3 == CPUchar && c3 ==  CPUchar && a3 == "-" && CPUPlayed == false) { a3 = CPUchar; CPUPlayed = true; }
+    //Left Diagonal
+    if (a1 == CPUchar && b2 == CPUchar && c3 == "-" && CPUPlayed == false) { c3 = CPUchar; CPUPlayed = false; }
+    if (a1 == CPUchar && c3 == CPUchar && b2 == "-" && CPUPlayed == false) { b2 = CPUchar; CPUPlayed = false; }
+    if (b2 == CPUchar && c3 == CPUchar && a1 == "-" && CPUPlayed == false) { a1 = CPUchar; CPUPlayed = false; }
+    //Right DIagomnal
+    if (a3 == CPUchar && b2 ==  CPUchar && c1 == "-" && CPUPlayed == false) { c1 = CPUchar; CPUPlayed = true; }
+    if (a3 == CPUchar && c1 ==  CPUchar && b2 == "-" && CPUPlayed == false) { b2 = CPUchar; CPUPlayed = true; }
+    if (b2 == CPUchar && c1 ==  CPUchar && a3 == "-" && CPUPlayed == false) { a3 = CPUchar; CPUPlayed = true; }
+
     //Block Player
     //Top Row
     if (a1 == xOrO && a2 == xOrO && a3 == "-" && CPUPlayed == false) { a3 = CPUchar; CPUPlayed = true; }
@@ -391,7 +450,8 @@ void cpuThink()
     if (a3 == xOrO && c1 ==  xOrO && b2 == "-" && CPUPlayed == false) { b2 = CPUchar; CPUPlayed = true; }
     if (b2 == xOrO && c1 ==  xOrO && a3 == "-" && CPUPlayed == false) { a3 = CPUchar; CPUPlayed = true; }
 
-
+    //Play Middle!
+    if (b2 == "-" && CPUPlayed == false) { b2 = CPUchar; CPUPlayed = true; }
     //Check if Corners are Occupied
     if (a1 == "-" && CPUPlayed == false) { a1 = CPUchar; CPUPlayed = true; }
     if (c3 == "-" && CPUPlayed == false) { c3 = CPUchar; CPUPlayed = true; }
