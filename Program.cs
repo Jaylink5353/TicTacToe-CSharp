@@ -323,7 +323,7 @@ void winLoseDraw()
     if (a3.Contains(xOrO) && b2.Contains(xOrO) && c1.Contains(xOrO)) { playerWins(); }//rl
 
     //draw
-    if (spacesOccupied == 9)
+    if (spacesOccupied >= 9)
     {
         Console.WriteLine("It's a draw!");
         Thread.Sleep(1500);
@@ -350,8 +350,40 @@ void cpuThink()
     Console.WriteLine("I'm Thinking....");
     Thread.Sleep(2000);
     //Block Player
-    if (a1 == xOrO && a2 == xOrO && a3 == "-" && CPUPlayed == false){ a3 = CPUchar;  CPUPlayed = true; }
+    //Top Row
+    if (a1 == xOrO && a2 == xOrO && a3 == "-" && CPUPlayed == false) { a3 = CPUchar; CPUPlayed = true; }
+    if (a1 == xOrO && a3 == xOrO && a2 == "-" && CPUPlayed == false) { a2 = CPUchar;  CPUPlayed = true; }
+    if (a2 == xOrO && a3 == xOrO && a1 == "-" && CPUPlayed == false) { a1 = CPUchar;  CPUPlayed = true; }
+    //middle row
+    if (b1 == xOrO && b2 == xOrO && b3 == "-" && CPUPlayed == false) { b3 = CPUchar; CPUPlayed = true; }
+    if (b1 == xOrO && b3 == xOrO && b2 == "-" && CPUPlayed == false) { b2 = CPUchar; CPUPlayed = true; }
+    if (b2 == xOrO && b3 == xOrO && b1 == "-" && CPUPlayed == false) { b1 = CPUchar;  CPUPlayed = true; }
+    //Bottom Row
+    if (c1 == xOrO && c2 == xOrO && c3 == "-" && CPUPlayed == false) { c3 = CPUchar; CPUPlayed = true; }
+    if (c1 == xOrO && c3 == xOrO && c2 == "-" && CPUPlayed == false) { c2 = CPUchar; CPUPlayed = true; }
+    if (c2 ==  xOrO && c3 == xOrO && c1 == "-" && CPUPlayed == false) { c1 = CPUchar;  CPUPlayed = true; }
+    //Left Colum
+    if (a1 == xOrO && b1 ==  xOrO && c1 == "-" && CPUPlayed == false) { c1 = CPUchar;  CPUPlayed = true; }
+    if (a1 == xOrO && c1 == xOrO && b1 == "-" && CPUPlayed == false) { b1 = CPUchar; CPUPlayed = true; }
+    if (b1 == xOrO && c1 == xOrO && a1 == "-" && CPUPlayed == false) { a1 = CPUchar;  CPUPlayed = true; }
+    //Middle Colum
+    if (a2 == xOrO && b2 ==  xOrO && c2 == "-" && CPUPlayed == false) { c2 = CPUchar; CPUPlayed = true; }
+    if (a2 == xOrO && c2 ==  xOrO && b2 == "-" && CPUPlayed == false) { b2 = CPUchar; CPUPlayed = true; }
+    if (b2 == xOrO && c2 ==  xOrO && a2 == "-" && CPUPlayed == false) { a2 = CPUchar; CPUPlayed = true; }
+    //Bottom Colum
+    if (a3 == xOrO && b3 ==  xOrO && c2 == "-" && CPUPlayed == false) { c3 = CPUchar; CPUPlayed = true; }
+    if (a3 == xOrO && c3 ==  xOrO && b3 == "-" && CPUPlayed == false) { b3 = CPUchar; CPUPlayed = true; }
+    if (b3 == xOrO && c3 ==  xOrO && a3 == "-" && CPUPlayed == false) { a3 = CPUchar; CPUPlayed = true; }
+    //Left Diagonal
+    if (a1 == xOrO && b2 == xOrO && c3 == "-" && CPUPlayed == false) { c3 = CPUchar; CPUPlayed = false; }
+    if (a1 == xOrO && c3 == xOrO && b2 == "-" && CPUPlayed == false) { b2 = CPUchar; CPUPlayed = false; }
+    if (b2 == xOrO && c3 == xOrO && a1 == "-" && CPUPlayed == false) { a1 = CPUchar; CPUPlayed = false; }
+    //Right DIagomnal
+    if (a3 == xOrO && b2 ==  xOrO && c1 == "-" && CPUPlayed == false) { c1 = CPUchar; CPUPlayed = true; }
+    if (a3 == xOrO && c1 ==  xOrO && b2 == "-" && CPUPlayed == false) { b2 = CPUchar; CPUPlayed = true; }
+    if (b2 == xOrO && c1 ==  xOrO && a3 == "-" && CPUPlayed == false) { a3 = CPUchar; CPUPlayed = true; }
 
+    
     //Check if Corners are Occupied
     if (a1 == "-" && CPUPlayed == false) { a1 = CPUchar; CPUPlayed = true; }
     if (c3 == "-" && CPUPlayed == false) { c3 = CPUchar; CPUPlayed = true; }
@@ -359,6 +391,8 @@ void cpuThink()
     if (a3 == "-" && CPUPlayed == false) { a3 = CPUchar; CPUPlayed = true; }
 
     //MUST BE AT END OF FUNCTION
+    spacesOccupied++;
     CPUPlayed = false;
 
 }
+
